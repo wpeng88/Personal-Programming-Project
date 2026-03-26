@@ -55,12 +55,12 @@ def random_bomb_placement(grid):
     print(grid[0][0])
     for i in range (10):
         letters = "ABCDEFGH"
-        random_cell(i) = random.choice(letters)+ randint(1,8)
-    print(random_cell(1))
+        random_cell = random.choice(letters)+ str(randint(1,8))
+        print(random_cell)
 # for row in grid
 #   for
 
-print(random_letter)
+# print(random_letter)
 
     # if difficulty == "easy":
 
