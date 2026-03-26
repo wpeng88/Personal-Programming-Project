@@ -1,5 +1,5 @@
 #test
-
+import time, sys
 rules = ("""
 Starting: The first click is always safe, often revealing a blank area.
 Numbers: A number (1-8) indicates exactly how many mines are in the 8 adjacent cells - horizontal, vertical, and diagonal.
