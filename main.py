@@ -1,5 +1,5 @@
 ## Personal Programming Project - William Peng
-import os, time, random
+import os, time, random, sys
 from random import randint
 
 def main():
@@ -13,11 +13,11 @@ def clear_screen():
     os.system("cls")
 
 def showrules():
-    rules = ("Starting: The first click is always safe, often revealing a blank area. \nNumbers: A number (1-8) indicates exactly how many mines are in the 8 adjacent cells - horizontal, vertical, and diagonal.\nEmpty Cells: Choosing a cell with no adjacent mines reveals a large area\nWinning: Clear all non-mine cells.\nLosing: If you choose a cell with a mine.\nFlagging: type 'flag' before coordinate to mark cells you suspect are mines (eg. if you wanted to flag cell 'H2' you would say 'flag H2')")
+    rules = ("Starting: The first click is always safe, often revealing a blank area. \nNumbers: A number (1-8) indicates exactly how many mines are in the 8 adjacent cells - horizontal, vertical, and diagonal.\nEmpty Cells: Choosing a cell with no adjacent mines reveals a large area\nWinning: Clear all non-mine cells.\nLosing: If you choose a cell with a mine.\nFlagging: type 'flag' before coordinate to mark cells you suspect are mines (eg. if you wanted to flag cell 'H2' you would say 'flag H2')")        
     for char in rules:
-        for let in char:
-            print(let, end='')  
-            time.sleep(0.01)                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+        sys.stdout.write(char)
+        sys.stdout.flush() # Forces immediate display
+        time.sleep(0.02) # Delays for 0.1 seconds                                                                                                                                                                                                                                                                                                                                                                                                                                      
 def game():
     # set_timer()
     # difficulty = set_difficulty()
