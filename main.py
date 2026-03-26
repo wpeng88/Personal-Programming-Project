@@ -7,7 +7,10 @@ def main():
     game()
 
 def clear_screen():
-    os.system
+    for i in range(3):
+        print(".")
+        time.sleep(1)
+    os.system("cls")
 
 def showrules():
     print("Starting: The first click is always safe, often revealing a blank area. \nNumbers: A number (1-8) indicates exactly how many mines are in the 8 adjacent cells - horizontal, vertical, and diagonal.\nEmpty Cells: Choosing a cell with no adjacent mines reveals a large area\nWinning: Clear all non-mine cells.\nLosing: If you choose a cell with a mine.\nFlagging: type 'flag' before coordinate to mark cells you suspect are mines (eg. if you wanted to flag cell 'H2' you would say 'flag H2')")
