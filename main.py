@@ -22,7 +22,7 @@ def game():
     # set_timer()
     # difficulty = set_difficulty()
     grid = set_grid()
-    random_bomb_placement()
+    random_bomb_placement(grid)
     # display_bombs_detected()
     # coordinate_user_input()
 
@@ -45,8 +45,8 @@ def set_grid():
              ["A8", "B8", "C8", "D8", "E8", "F8", "G8", "H8"]]
     return grid
 
-def random_bomb_placement():
-    pass
+def random_bomb_placement(grid):
+    print(grid[0][0])
     # if difficulty == "easy":
 
 
