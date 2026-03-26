@@ -1,6 +1,7 @@
 ## Personal Programming Project - William Peng
 import os, time, random, sys
 from random import randint
+from time import sleep
 
 def main():
     showrules()
@@ -21,9 +22,8 @@ Winning: Clear all non-mine cells.
 Losing: If you choose a cell with a mine.
 Flagging: type 'flag' before coordinate to mark cells you suspect are mines (eg. if you wanted to flag cell 'H2' you would say 'flag H2')""")        
     for char in rules:
-        sys.stdout.write(char)
-        sys.stdout.flush() # Forces immediate display
-        time.sleep(0.02) # Delays for 0.1 seconds                                                                                                                                                                                                                                                                                                                                                                                                                                      
+        print(char, end = "", flush = True)
+        sleep(0.02)                                                                                                                                                                                                                                                                                                                                                                                                                              
 def game():
     # set_timer()
     # difficulty = set_difficulty()

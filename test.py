@@ -1,5 +1,6 @@
 #test
 import time, sys
+from time import sleep
 rules = ("""
 Starting: The first click is always safe, often revealing a blank area.
 Numbers: A number (1-8) indicates exactly how many mines are in the 8 adjacent cells - horizontal, vertical, and diagonal.
@@ -10,6 +11,7 @@ Flagging: type 'flag' before coordinate to mark cells you suspect are mines (eg.
 
 for char in rules:
     print(char, end = "", flush = True)
+    sleep(0.02)
     # sys.stdout.write(char)
     # sys.stdout.flush() # Forces immediate display
     # time.sleep(0.02) # Delays for 0.1 seconds 
