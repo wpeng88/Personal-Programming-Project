@@ -52,12 +52,15 @@ def set_grid():
     return grid
 
 def random_bomb_placement(grid):
-    print(grid[0][0])
+    chosen_bomb_cells = []
     for i in range (10):
         letters = "ABCDEFGH"
         random_cell = random.choice(letters)+ str(randint(1,8))
-        print(random_cell)
-# for row in grid
+        if random_cell not in chosen_bomb_cells:
+            chosen_bomb_cells.append(random_cell)
+    print(chosen_bomb_cells)
+    return chosen_bomb_cells
+    
 #   for
 
 # print(random_letter)
