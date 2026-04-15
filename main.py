@@ -14,16 +14,18 @@ def clear_screen():
     os.system("cls")
 
 def showrules():
-    rules = ("""
-Starting: The first click is always safe, often revealing a blank area.
-Numbers: A number (1-8) indicates exactly how many mines are in the 8 adjacent cells - horizontal, vertical, and diagonal.
-Empty Cells: Choosing a cell with no adjacent mines reveals a large area
-Winning: Clear all non-mine cells.
-Losing: If you choose a cell with a mine.
-Flagging: type 'flag' before coordinate to mark cells you suspect are mines (eg. if you wanted to flag cell 'H2' you would say 'flag H2')""")        
-    for char in rules:
-        print(char, end = "", flush = True)
-        sleep(0.02)                                                                                                                                                                                                                                                                                                                                                                                                                              
+#     rules = ("""
+# Starting: The first click is always safe, often revealing a blank area.
+# Numbers: A number (1-8) indicates exactly how many mines are in the 8 adjacent cells - horizontal, vertical, and diagonal.
+# Empty Cells: Choosing a cell with no adjacent mines reveals a large area
+# Winning: Clear all non-mine cells.
+# Losing: If you choose a cell with a mine.
+# Flagging: type 'flag' before coordinate to mark cells you suspect are mines (eg. if you wanted to flag cell 'H2' you would say 'flag H2')""")        
+#     for char in rules:
+#         print(char, end = "", flush = True)
+#         sleep(0.02)   
+    pass
+
 def game():
     # set_timer()
     # difficulty = set_difficulty()
@@ -49,7 +51,10 @@ def set_grid():
              ["A6", "B6", "C6", "D6", "E6", "F6", "G6", "H6"],
              ["A7", "B7", "C7", "D7", "E7", "F7", "G7", "H7"],
              ["A8", "B8", "C8", "D8", "E8", "F8", "G8", "H8"]]
+    print(grid)
+    print(grid[3][0])
     return grid
+
 
 def random_bomb_placement(grid):
     chosen_bomb_cells = []
