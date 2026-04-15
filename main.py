@@ -51,20 +51,21 @@ def set_grid():
              ["A6", "B6", "C6", "D6", "E6", "F6", "G6", "H6"],
              ["A7", "B7", "C7", "D7", "E7", "F7", "G7", "H7"],
              ["A8", "B8", "C8", "D8", "E8", "F8", "G8", "H8"]]
-    print(grid)
-    print(grid[3][0])
     return grid
 
 
 def random_bomb_placement(grid):
     chosen_bomb_cells = []
     for i in range (10):
-        letters = "ABCDEFGH"
-        random_cell = random.choice(letters)+ str(randint(1,8))
+        random_cell = str(randint(1,8)) + str(randint(1,8))
         print(random_cell)
+        random_cell = int(random_cell)
         if random_cell not in chosen_bomb_cells:
             chosen_bomb_cells.append(random_cell)
     print(chosen_bomb_cells)
+    for cell in random_cell:
+        for num in cell:
+            print(grid[num][num])
     return chosen_bomb_cells
     
 #   for
