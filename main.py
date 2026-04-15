@@ -55,17 +55,20 @@ def set_grid():
 
 
 def random_bomb_placement(grid):
+    x = ""
+    y = ""
     chosen_bomb_cells = []
     for i in range (10):
         random_cell = str(randint(1,8)) + str(randint(1,8))
         print(random_cell)
-        random_cell = int(random_cell)
         if random_cell not in chosen_bomb_cells:
             chosen_bomb_cells.append(random_cell)
     print(chosen_bomb_cells)
     for cell in random_cell:
-        for num in cell:
-            print(grid[num][num])
+        print(cell)
+        # cell[0] = x
+        # cell[1] = y
+        # print(grid[x][y])
     return chosen_bomb_cells
     
 #   for
