@@ -31,6 +31,7 @@ def game():
     # difficulty = set_difficulty()
     grid = set_grid()
     random_bomb_placement(grid)
+    display_grid()
     # display_bombs_detected()
     # coordinate_user_input()
 
@@ -53,22 +54,39 @@ def set_grid():
              ["A8", "B8", "C8", "D8", "E8", "F8", "G8", "H8"]]
     return grid
 
+def display_grid(grid):
+    rows = 8
+    cols = 8
+    column_headers = "A B C D E F G H"
+    print("   " + column_headers)
+    for row in range(1, rows + 1):
+        row_display = f"{row:<2}"
+        row_display += "⬜️" * cols 
+        print(row_display)
+
+    rows = len(grid)
+    cols = len(grid[0])
+    column_headers = " ".join([chr(65 + i) for i in range(cols)])
+    print("  " + column_headers) 
+    for row in range(rows):
+        row_display = f"{row + 1:<2}"
+        row_display += " ".join(grid[row])
+        print(row_display)
 
 def random_bomb_placement(grid):
-    x = ""
-    y = ""
     chosen_bomb_cells = []
-    for i in range (10):
-        random_cell = str(randint(1,8)) + str(randint(1,8))
+    while len(chosen_bomb_cells) < 10:
+        random_cell = str(randint(1, 8)) + str(randint(1, 8))
         if random_cell not in chosen_bomb_cells:
             chosen_bomb_cells.append(random_cell)
     print(chosen_bomb_cells)
     for cell in chosen_bomb_cells:
         print(cell)
-        int(cell)
-        cell[0] = x
-        cell[1] = y
+        x, y = int(cell[0]) - 1, int(cell[1]) - 1
         print(grid[x][y])
+        grid[x][y] = "bomb"
+        print(grid[x][y])
+    print(grid)
     return chosen_bomb_cells
     
 #   for
