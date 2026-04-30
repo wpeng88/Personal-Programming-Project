@@ -54,24 +54,24 @@ def set_grid():
              ["A8", "B8", "C8", "D8", "E8", "F8", "G8", "H8"]]
     return grid
 
-def display_grid():
-    rows = 8
-    cols = 8
-    column_headers = "A B C D E F G H"
-    print("   " + column_headers)
-    for row in range(1, rows + 1):
-        row_display = f"{row:<2}"
-        row_display += "⬜️" * cols 
-        print(len(grid))
-# def display_grid(grid)
-    # rows = len(grid)
-    # cols = len(grid[0])
-    # column_headers = " ".join([chr(65 + i) for i in range(cols)])
-    # print("  " + column_headers) 
-    # for row in range(rows):
-    #     row_display = f"{row + 1:<2}"
-    #     row_display += " ".join(grid[row])
-    #     print(row_display)
+# def display_grid():
+#     rows = 8
+#     cols = 8
+#     column_headers = "A B C D E F G H"
+#     print("   " + column_headers)
+#     for row in range(1, rows + 1):
+#         row_display = f"{row:<2}"
+#         row_display += "⬜️" * cols 
+#         print(len(grid))
+def display_grid(grid):
+    rows = len(grid)
+    cols = len(grid[0])
+    column_headers = " ".join([chr(65 + i) for i in range(cols)])
+    print("  " + column_headers) 
+    for row in range(rows):
+        row_display = f"{row + 1:<2}"
+        row_display += " ".join(grid[row])
+        print(row_display)
 
 def random_bomb_placement(grid):
     chosen_bomb_cells = []
