@@ -64,7 +64,7 @@ def display_grid():
     print("   " + column_headers)
     for row in range(1, rows + 1):
         row_display = f"{row:<2}"
-        row_display += "⬜️" * cols 
+        # row_display += "⬜️" * cols 
         print(row_display)
 # def display_grid(grid):
 #     rows = len(grid)
