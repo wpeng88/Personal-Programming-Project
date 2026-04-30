@@ -52,6 +52,11 @@ def set_grid():
              ["A6", "B6", "C6", "D6", "E6", "F6", "G6", "H6"],
              ["A7", "B7", "C7", "D7", "E7", "F7", "G7", "H7"],
              ["A8", "B8", "C8", "D8", "E8", "F8", "G8", "H8"]]
+    return grid
+
+
+def display_grid():
+    grid = set_grid()
     show_grid = [["⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️"],
              ["⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️"],
              ["⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️"],
@@ -60,11 +65,6 @@ def set_grid():
              ["⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️"],
              ["⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️"],
              ["⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️"]]
-    return grid
-
-def display_grid():
-    grid = set_grid()
-    show_grid = show_grid()
     rows = len(grid)
     print(rows)
     cols = len(grid[0])
@@ -75,7 +75,7 @@ def display_grid():
         row_display = f"{row:<2}"
         row_display += "⬜️" * cols 
         print(row_display)
-        print(show_grid)
+    print(show_grid)
 
 def random_bomb_placement(grid):
     chosen_bomb_cells = []
