@@ -14,16 +14,16 @@ def clear_screen():
     os.system("cls")
 
 def showrules():
-#     rules = ("""
-# Starting: The first click is always safe, often revealing a blank area.
-# Numbers: A number (1-8) indicates exactly how many mines are in the 8 adjacent cells - horizontal, vertical, and diagonal.
-# Empty Cells: Choosing a cell with no adjacent mines reveals a large area
-# Winning: Clear all non-mine cells.
-# Losing: If you choose a cell with a mine.
-# Flagging: type 'flag' before coordinate to mark cells you suspect are mines (eg. if you wanted to flag cell 'H2' you would say 'flag H2')""")        
-#     for char in rules:
-#         print(char, end = "", flush = True)
-#         sleep(0.02)   
+    rules = ("""
+Starting: The first click is always safe, often revealing a blank area.
+Numbers: A number (1-8) indicates exactly how many mines are in the 8 adjacent cells - horizontal, vertical, and diagonal.
+Empty Cells: Choosing a cell with no adjacent mines reveals a large area
+Winning: Clear all non-mine cells.
+Losing: If you choose a cell with a mine.
+Flagging: type 'flag' before coordinate to mark cells you suspect are mines (eg. if you wanted to flag cell 'H2' you would say 'flag H2')""")        
+    for char in rules:
+        print(char, end = "", flush = True)
+        sleep(0.02)   
     pass
 
 def game():
@@ -88,7 +88,6 @@ def random_bomb_placement(grid):
     for cell in chosen_bomb_cells:
         x, y = int(cell[0]) - 1, int(cell[1]) - 1
         grid[x][y] = "bomb"
-    print(grid[1][5])
     return chosen_bomb_cells
     
 #   for
