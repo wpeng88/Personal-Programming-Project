@@ -104,7 +104,7 @@ def random_bomb_placement():
     
 
 def hidden_grid():
-    grid = random_bomb_placement()
+    grid, chosen_bomb_cells = random_bomb_placement()
     rows = len(grid)
     cols = len(grid[0])
     column_headers = "A B C D E F G H"
