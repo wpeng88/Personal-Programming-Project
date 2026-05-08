@@ -99,11 +99,12 @@ def random_bomb_placement():
         x, y = int(cell[0]) - 1, int(cell[1]) - 1
         grid[x][y] = "💣"
     print(grid)
-    return chosen_bomb_cells
-    return grid
+    return grid, chosen_bomb_cells
+    
+    
 
 def hidden_grid():
-    grid = set_grid()
+    grid = random_bomb_placement()
     rows = len(grid)
     cols = len(grid[0])
     column_headers = "A B C D E F G H"
