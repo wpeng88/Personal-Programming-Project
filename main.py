@@ -86,7 +86,6 @@ def random_bomb_placement(grid):
             chosen_bomb_cells.append(random_cell)
     print(chosen_bomb_cells)
     for cell in chosen_bomb_cells:
-        print(cell)
         x, y = int(cell[0]) - 1, int(cell[1]) - 1
         print(grid[x][y])
         grid[x][y] = "bomb"
