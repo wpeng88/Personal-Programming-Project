@@ -32,8 +32,8 @@ def game():
     # difficulty = set_difficulty()
     grid = set_grid()
     random_bomb_placement()
+    hidden_grid()
     display_grid()
-    grid = hidden_grid()
     # display_bombs_detected()
     # coordinate_user_input()
 
@@ -62,6 +62,7 @@ def set_grid():
              ["⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️"],
              ["⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️"],
              ["⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️"]]  
+    return grid
 
 def display_grid():
     grid = set_grid()
@@ -97,7 +98,9 @@ def random_bomb_placement():
     for cell in chosen_bomb_cells:
         x, y = int(cell[0]) - 1, int(cell[1]) - 1
         grid[x][y] = "💣"
+    print(grid)
     return chosen_bomb_cells
+    return grid
 
 def hidden_grid():
     grid = set_grid()
