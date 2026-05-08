@@ -56,7 +56,7 @@ def set_grid():
 
 def display_grid():
     grid = set_grid()
-    show_grid = [["⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️"],
+    show_grid = [["⬜️", "⬜️", "⬜️", "⬜️", "💣", "⬜️", "⬜️", "⬜️"],
              ["⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️"],
              ["⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️"],
              ["⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️"],
@@ -71,9 +71,8 @@ def display_grid():
     column_headers = "A B C D E F G H"
     print("   " + column_headers)
     for row in range(1, rows + 1):
-        row_display = f"{row:<2}"
+        row_display = f"{row:<3}"
         row_display += show_grid[row - 1][0] + show_grid[row - 1][1] + show_grid[row - 1][2] + show_grid[row - 1][3] + show_grid[row - 1][4] + show_grid[row - 1][5] + show_grid[row - 1][6] + show_grid[row - 1][7]
-        # row_display += "⬜️" * cols 
         print(row_display)
     
 
