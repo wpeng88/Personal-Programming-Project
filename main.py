@@ -65,7 +65,7 @@ def display_grid():
              ["⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️"],
              ["⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️"]]
     print(show_grid[0][0])
-    rows = 9
+    rows = len(grid)
     print(rows)
     cols = len(grid[0])
     print(cols)
@@ -75,6 +75,7 @@ def display_grid():
         row_display = f"{row:<3}"
         row_display += show_grid[row - 1][0] + show_grid[row - 1][1] + show_grid[row - 1][2] + show_grid[row - 1][3] + show_grid[row - 1][4] + show_grid[row - 1][5] + show_grid[row - 1][6] + show_grid[row - 1][7]
         print(row_display)
+    return(row_display)
     
 
 def random_bomb_placement(grid):
