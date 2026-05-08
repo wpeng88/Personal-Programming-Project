@@ -33,6 +33,7 @@ def game():
     grid = set_grid()
     random_bomb_placement(grid)
     display_grid()
+    grid = hidden_grid(grid)
     # display_bombs_detected()
     # coordinate_user_input()
 
@@ -60,16 +61,7 @@ def set_grid():
              ["⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️"],
              ["⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️"],
              ["⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️"],
-             ["⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️"]]
-    rows = len(grid)
-    cols = len(grid[0])
-    column_headers = "A B C D E F G H"
-    print("   " + column_headers)
-    for row in range(1, rows + 1):
-        grid_display = f"{row:<3}"
-        grid_display += grid[row - 1][0] + grid[row - 1][1] + grid[row - 1][2] + grid[row - 1][3] + grid[row - 1][4] + grid[row - 1][5] + grid[row - 1][6] + grid[row - 1][7]
-        print(grid_display)
-    return grid    
+             ["⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️"]]  
 
 def display_grid():
     grid = set_grid()
@@ -106,6 +98,17 @@ def random_bomb_placement(grid):
         grid[x][y] = "💣"
     print(chosen_bomb_cells)
     return chosen_bomb_cells
+
+def hidden_grid(grid):
+    rows = len(grid)
+    cols = len(grid[0])
+    column_headers = "A B C D E F G H"
+    print("   " + column_headers)
+    for row in range(1, rows + 1):
+        grid_display = f"{row:<3}"
+        grid_display += grid[row - 1][0] + grid[row - 1][1] + grid[row - 1][2] + grid[row - 1][3] + grid[row - 1][4] + grid[row - 1][5] + grid[row - 1][6] + grid[row - 1][7]
+        print(grid_display)
+    return grid  
     
 #   for
 
