@@ -23,7 +23,8 @@ Losing: If you choose a cell with a mine.
 Flagging: type 'flag' before coordinate to mark cells you suspect are mines (eg. if you wanted to flag cell 'H2' you would say 'flag H2')""")        
     for char in rules:
         print(char, end = "", flush = True)
-        sleep(0.02)   
+        # sleep(0.02)
+        sleep(0.00001)   
     pass
 
 def game():
@@ -95,7 +96,8 @@ def random_bomb_placement(grid):
     print(chosen_bomb_cells)
     for cell in chosen_bomb_cells:
         x, y = int(cell[0]) - 1, int(cell[1]) - 1
-        grid[x][y] = "bomb"
+        grid[x][y] = "💣"
+    print(chosen_bomb_cells)
     return chosen_bomb_cells
     
 #   for
