@@ -73,10 +73,9 @@ def random_bomb_placement():
         random_cell = str(randint(1, 8)) + str(randint(1, 8))
         if random_cell not in chosen_bomb_cells:
             chosen_bomb_cells.append(random_cell)
-    print(chosen_bomb_cells)
     for cell in chosen_bomb_cells:
         x, y = int(cell[0]) - 1, int(cell[1]) - 1
-        grid[x][y] = "💣"
+        # grid[x][y] = "💣"
     print(grid)
     return grid, chosen_bomb_cells
     
