@@ -77,6 +77,7 @@ def random_bomb_placement():
     for cell in chosen_bomb_cells:
         x, y = int(cell[0]) - 1, int(cell[1]) - 1
         grid[x][y] = "💣"
+    print(grid)
     return grid, chosen_bomb_cells
     
     
@@ -90,7 +91,7 @@ def hidden_no_number_grid():
     for row in range(1, rows + 1):
         grid_display = f"{row:<3}"
         grid_display += grid[row - 1][0] + grid[row - 1][1] + grid[row - 1][2] + grid[row - 1][3] + grid[row - 1][4] + grid[row - 1][5] + grid[row - 1][6] + grid[row - 1][7]
-        # print(grid_display)
+        print(grid_display)
     return grid_display
 
 def hidden_grid():
@@ -98,7 +99,7 @@ def hidden_grid():
     grid_display = hidden_no_number_grid()
 
 
-
+    
 
 def display_grid():
     grid = set_grid()
