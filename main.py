@@ -45,6 +45,7 @@ def game():
 #     print("Game load difficulty level based on number of bombs 💣 and board size. \nEasy - 10 bombs size 8*8\nMid - 40 bombs size 16 * 16\nHard - 99 bombs size 26 * 16 ")
 #     difficulty = input("Choose your difficulty... (Easy, Medium, Hard)").lower()
 #     return difficulty
+
 def set_grid():
     # grid = [["A1", "B1", "C1", "D1", "E1", "F1", "G1", "H1"],
     #          ["A2", "B2", "C2", "D2", "E2", "F2", "G2", "H2"],
@@ -116,7 +117,8 @@ def hidden_no_number_grid():
 
 def hidden_grid():
     grid, chosen_bomb_cells = random_bomb_placement()
-    
+    grid_display = hidden_no_number_grid()
+
     
 
      
