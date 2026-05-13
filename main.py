@@ -62,6 +62,7 @@ def set_grid():
              ["⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️"],
              ["⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️"],
              ["⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️"]]  
+    print(grid)
     return grid
 
 
@@ -75,8 +76,7 @@ def random_bomb_placement():
             chosen_bomb_cells.append(random_cell)
     for cell in chosen_bomb_cells:
         x, y = int(cell[0]) - 1, int(cell[1]) - 1
-        # grid[x][y] = "💣"
-    print(grid)
+        grid[x][y] = "💣"
     return grid, chosen_bomb_cells
     
     
