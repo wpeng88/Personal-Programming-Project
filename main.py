@@ -30,7 +30,6 @@ Flagging: type 'flag' before coordinate to mark cells you suspect are mines (eg.
 def game():
     # set_timer()
     # difficulty = set_difficulty()
-    grid = set_grid()
     random_bomb_placement()
     hidden_no_number_grid()
     display_grid()
