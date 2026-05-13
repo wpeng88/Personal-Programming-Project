@@ -116,7 +116,7 @@ def hidden_no_number_grid():
 
 def hidden_grid():
     grid, chosen_bomb_cells = random_bomb_placement()
-    chosen 
+    
     
 
      
