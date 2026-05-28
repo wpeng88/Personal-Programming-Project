@@ -77,7 +77,8 @@ def random_bomb_placement():
     for cell in chosen_bomb_cells:
         x, y = int(cell[0]) - 1, int(cell[1]) - 1
         grid[x][y] = "💣"
-    print(grid)
+    for cell in grid:
+        print(cell[0] + cell[1])
     return grid, chosen_bomb_cells
     
     
@@ -98,9 +99,8 @@ def calculate_bombs_around():
     directions = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
     bomb_count = 0 
     for cell in grid:
-        print(cell[0] + cell[1])
-        # if cell != "💣":
-        #     x, y = int(cell[0]) - 1, int(cell[1]) - 1
+        if cell != "💣":
+            x, y = int(cell[0]) - 1, int(cell[1]) - 1
     for dx, dy in directions:
         nx, ny = x + dx, y + dy 
         if 0 <= nx < len(grid) and 0 <= ny < len(grid[0]) and grid[nx][ny] == "💣":
