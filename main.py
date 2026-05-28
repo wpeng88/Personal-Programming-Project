@@ -31,7 +31,7 @@ def game():
     # set_timer()
     # difficulty = set_difficulty()
     random_bomb_placement()
-    hidden_no_number_grid()
+    hidden_grid()
     display_grid()
     bomb_count_grid = calculate_bombs_around()
     print(bomb_count_grid)
@@ -83,8 +83,8 @@ def random_bomb_placement():
     
     
 
-def hidden_no_number_grid():
-    grid, chosen_bomb_cells = random_bomb_placement()
+def hidden_grid():
+    grid = calculate_bombs_around()
     rows = len(grid)
     cols = len(grid[0])
     # for x in range(rows):
@@ -116,9 +116,9 @@ def calculate_bombs_around():
             bomb_count_grid[x][y] = bomb_count
     return bomb_count_grid
 
-def hidden_grid():
-    grid, chosen_bomb_cells = random_bomb_placement()
-    grid_display = hidden_no_number_grid()
+# def hidden_grid():
+#     grid, chosen_bomb_cells = random_bomb_placement()
+#     grid_display = hidden_no_number_grid()
     
 
 
