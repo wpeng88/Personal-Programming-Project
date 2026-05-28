@@ -79,7 +79,7 @@ def hidden_grid():
     print("   " + column_headers)
     for row in range(1, rows + 1):
         grid_display = f"{row:<3}"
-        grid_display += grid[row - 1][0] + grid[row - 1][1] + grid[row - 1][2] + grid[row - 1][3] + grid[row - 1][4] + grid[row - 1][5] + grid[row - 1][6] + grid[row - 1][7]
+        grid_display += grid[row - 1][0] + " " + grid[row - 1][1] + " " + grid[row - 1][2] + " " + grid[row - 1][3] + " " + grid[row - 1][4] + " " + grid[row - 1][5] + " " + grid[row - 1][6] + " " + grid[row - 1][7]
         print(grid_display)
     return grid_display
 
@@ -142,23 +142,6 @@ def display_grid():
         row_display += show_grid[row - 1][0] + show_grid[row - 1][1] + show_grid[row - 1][2] + show_grid[row - 1][3] + show_grid[row - 1][4] + show_grid[row - 1][5] + show_grid[row - 1][6] + show_grid[row - 1][7]
         print(row_display)
     return(row_display)
-    
-    
-
-     
-    
-#   for
-
-# print(random_letter)
-
-    # if difficulty == "easy":
-
-
-
-#   for room in house:
-#     for colour in room:
-#       print("{:<10}".format(colour), end = "")
-#     print("\n")
     
     
 main()
