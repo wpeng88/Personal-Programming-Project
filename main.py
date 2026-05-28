@@ -85,10 +85,11 @@ def hidden_no_number_grid():
     grid, chosen_bomb_cells = random_bomb_placement()
     rows = len(grid)
     cols = len(grid[0])
-    for x in range(rows):
-        for y in range(cols):
-            if grid[x][y] != "💣": 
-                grid[x][y] = str(calculate_bombs_around(grid, x, y))
+    # for x in range(rows):
+    #     for y in range(cols):
+    #         if grid[x][y] != "💣": 
+    #             grid[x][y] = str(calculate_bombs_around())
+    calculate_bombs_around()
     column_headers = "A B C D E F G H"
     print("   " + column_headers)
     for row in range(1, rows + 1):
@@ -100,6 +101,7 @@ def calculate_bombs_around():
     grid, chosen_bomb_cells = random_bomb_placement()
     directions = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
     bomb_count_grid = [[0 for _ in range(len(grid[0]))] for _ in range(len(grid))]
+    print(bomb_count_grid)
     for x in range(len(grid)):
         for y in range(len(grid[0])):
             if grid[x][y] == "💣":
@@ -111,7 +113,6 @@ def calculate_bombs_around():
                 if 0 <= nx < len(grid) and 0 <= ny < len(grid[0]) and grid[nx][ny] == "💣":
                     bomb_count += 1
             
-            # Store the bomb count in the new grid
             bomb_count_grid[x][y] = bomb_count
     
     return bomb_count_grid
