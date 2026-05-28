@@ -91,7 +91,6 @@ def hidden_no_number_grid():
     for row in range(1, rows + 1):
         grid_display = f"{row:<3}"
         grid_display += grid[row - 1][0] + grid[row - 1][1] + grid[row - 1][2] + grid[row - 1][3] + grid[row - 1][4] + grid[row - 1][5] + grid[row - 1][6] + grid[row - 1][7]
-        print(grid_display)
     return grid_display
 
 def calculate_bombs_around():
@@ -99,8 +98,9 @@ def calculate_bombs_around():
     directions = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
     bomb_count = 0 
     for cell in grid:
-        if cell != "💣":
-            x, y = int(cell[0]) - 1, int(cell[1]) - 1
+        print(cell[0] + cell[1])
+        # if cell != "💣":
+        #     x, y = int(cell[0]) - 1, int(cell[1]) - 1
     for dx, dy in directions:
         nx, ny = x + dx, y + dy 
         if 0 <= nx < len(grid) and 0 <= ny < len(grid[0]) and grid[nx][ny] == "💣":
