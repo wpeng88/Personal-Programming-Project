@@ -77,6 +77,7 @@ def random_bomb_placement():
     for cell in chosen_bomb_cells:
         x, y = int(cell[0]) - 1, int(cell[1]) - 1
         grid[x][y] = "💣"
+    print(chosen_bomb_cells)
     print(cell[1])
     return grid, chosen_bomb_cells
     
