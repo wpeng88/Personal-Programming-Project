@@ -33,8 +33,6 @@ def game():
     random_bomb_placement()
     hidden_grid()
     display_grid()
-    bomb_count_grid = calculate_bombs_around()
-    print(bomb_count_grid)
     # display_bombs_detected()
     # coordinate_user_input()
 
@@ -87,10 +85,6 @@ def hidden_grid():
     grid = calculate_bombs_around()
     rows = len(grid)
     cols = len(grid[0])
-    # for x in range(rows):
-    #     for y in range(cols):
-    #         if grid[x][y] != "💣": 
-    #             grid[x][y] = str(calculate_bombs_around())
     column_headers = "A B C D E F G H"
     print("   " + column_headers)
     for row in range(1, rows + 1):
