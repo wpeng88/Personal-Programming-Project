@@ -96,6 +96,7 @@ def hidden_grid():
     for row in range(1, rows + 1):
         grid_display = f"{row:<3}"
         grid_display += grid[row - 1][0] + grid[row - 1][1] + grid[row - 1][2] + grid[row - 1][3] + grid[row - 1][4] + grid[row - 1][5] + grid[row - 1][6] + grid[row - 1][7]
+        print(grid_display)
     return grid_display
 
 def calculate_bombs_around():
@@ -113,7 +114,7 @@ def calculate_bombs_around():
                 nx, ny = x + dx, y + dy 
                 if 0 <= nx < len(grid) and 0 <= ny < len(grid[0]) and grid[nx][ny] == "💣":
                     bomb_count += 1
-            bomb_count_grid[x][y] = bomb_count
+            bomb_count_grid[x][y] = str(bomb_count)
     return bomb_count_grid
 
 # def hidden_grid():
