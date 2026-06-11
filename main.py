@@ -69,6 +69,7 @@ def random_bomb_placement():
     for cell in chosen_bomb_cells:
         x, y = int(cell[0]) - 1, int(cell[1]) - 1
         grid[x][y] = "💣"
+    print(chosen_bomb_cells)
     return grid, chosen_bomb_cells
     
 
@@ -150,11 +151,12 @@ def coordinate_user_input():
     reveal_cell()
     return user_input
 
-def reveal_cell(user_input):
+def reveal_cell(user_input, chosen_bomb_cells, row_display):
     if user_input in chosen_bomb_cells:
+        row_display = row_display.replace("⬜️", "💣")
         print("Game Over! You hit a bomb!")
     if user_input not in chosen_bomb_cells:
-        
+        print("Safe! Keep going!")
     pass
 
 
