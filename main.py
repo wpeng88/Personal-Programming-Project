@@ -89,7 +89,7 @@ def calculate_bombs_around():
     grid, chosen_bomb_cells = random_bomb_placement()
     directions = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
     bomb_count_grid = [[0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0]]
-    print(bomb_count_grid)
+
     for x in range(len(grid)):
         for y in range(len(grid[0])):
             if grid[x][y] == "💣":
@@ -147,7 +147,10 @@ def display_grid():
     return(row_display)
 
 def coordinate_user_input():
+    pass
     user_input = input("Choose a square by typing the coordinates (eg. A1)")
+    if user_input[0] == "A":
+        user_input = "0" + user_input[1]
     reveal_cell()
     return user_input
 
