@@ -15,7 +15,7 @@ def clear_screen():
 
 def showrules():
     rules = ("""
-Starting: The first click is always safe, often revealing a blank area.
+Starting: Choose a square by typing the coordinates (eg. A1) for the first square in the first row. The first square is always safe, often revealing a blank area.
 Numbers: A number (1-8) indicates exactly how many mines are in the 8 adjacent cells - horizontal, vertical, and diagonal.
 Empty Cells: Choosing a cell with no adjacent mines reveals a large area
 Winning: Clear all non-mine cells.
@@ -33,6 +33,7 @@ def game():
     random_bomb_placement()
     hidden_grid()
     display_grid()
+    coordinate_user_input()
     # display_bombs_detected()
     # coordinate_user_input()
 
@@ -141,8 +142,21 @@ def display_grid():
     for row in range(1, rows + 1):
         row_display = f"{row:<3}"
         row_display += show_grid[row - 1][0] + show_grid[row - 1][1] + show_grid[row - 1][2] + show_grid[row - 1][3] + show_grid[row - 1][4] + show_grid[row - 1][5] + show_grid[row - 1][6] + show_grid[row - 1][7]
-        # print(row_display)
+        print(row_display)
     return(row_display)
-    
+
+def coordinate_user_input():
+    user_input = input("Choose a square by typing the coordinates (eg. A1)")
+    reveal_cell()
+    return user_input
+
+def reveal_cell(user_input):
+    if user_input in chosen_bomb_cells:
+        print("Game Over! You hit a bomb!")
+    if user_input not in chosen_bomb_cells:
+        
+    pass
+
+
     
 main()
