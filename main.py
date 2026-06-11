@@ -67,7 +67,7 @@ def random_bomb_placement():
             chosen_bomb_cells.append(random_cell)
     for cell in chosen_bomb_cells:
         x, y = int(cell[0]) - 1, int(cell[1]) - 1
-        grid[x][y] = "💥"
+        grid[x][y] = "💣"
     return grid, chosen_bomb_cells
     
 
@@ -90,35 +90,36 @@ def calculate_bombs_around():
     print(bomb_count_grid)
     for x in range(len(grid)):
         for y in range(len(grid[0])):
-            if grid[x][y] == "💥":
-                bomb_count_grid[x][y] = "💥"
+            if grid[x][y] == "💣":
+                bomb_count_grid[x][y] = "💣"
                 continue
             bomb_count = 0
             for dx, dy in directions:
                 nx, ny = x + dx, y + dy 
-                if 0 <= nx < len(grid) and 0 <= ny < len(grid[0]) and grid[nx][ny] == "💥":
+                if 0 <= nx < len(grid) and 0 <= ny < len(grid[0]) and grid[nx][ny] == "💣":
                     bomb_count += 1
             if bomb_count == 0:   
-                bomb_count_grid[x][y] = "0️⃣"
+                bomb_count_grid[x][y] = "0"
             elif bomb_count == 1:
-                bomb_count_grid[x][y] = "1️⃣"
+                bomb_count_grid[x][y] = "1"
             elif bomb_count == 2:
-                bomb_count_grid[x][y] = "2️⃣"
+                bomb_count_grid[x][y] = "2"
             elif bomb_count == 3:
-                bomb_count_grid[x][y] = "3️⃣"
+                bomb_count_grid[x][y] = "3"
             elif bomb_count == 4:
-                bomb_count_grid[x][y] = "4️⃣"
+                bomb_count_grid[x][y] = "4"
             elif bomb_count == 5:
-                bomb_count_grid[x][y] = "5️⃣"
+                bomb_count_grid[x][y] = "5"
             elif bomb_count == 6:
-                bomb_count_grid[x][y] = "6️⃣"
+                bomb_count_grid[x][y] = "6"
             elif bomb_count == 7:
-                bomb_count_grid[x][y] = "7️⃣"
+                bomb_count_grid[x][y] = "7"
             elif bomb_count == 8:
-                bomb_count_grid[x][y] = "8️⃣"
+                bomb_count_grid[x][y] = "8"
             else:
-                bomb_count_grid[x][y] = "0️⃣"
+                bomb_count_grid[x][y] = "0"
     return bomb_count_grid
+
 
 # def hidden_grid():
 #     grid, chosen_bomb_cells = random_bomb_placement()
@@ -140,7 +141,7 @@ def display_grid():
     for row in range(1, rows + 1):
         row_display = f"{row:<3}"
         row_display += show_grid[row - 1][0] + show_grid[row - 1][1] + show_grid[row - 1][2] + show_grid[row - 1][3] + show_grid[row - 1][4] + show_grid[row - 1][5] + show_grid[row - 1][6] + show_grid[row - 1][7]
-        print(row_display)
+        # print(row_display)
     return(row_display)
     
     
