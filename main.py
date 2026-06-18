@@ -33,7 +33,7 @@ def game():
     hidden_grid()
     display_grid()
     coordinate_user_input()
-    reveal_cell(user_input, chosen_bomb_cells, row_display)
+    reveal_cell()
     # display_bombs_detected()
     # coordinate_user_input()
 
@@ -172,7 +172,11 @@ def coordinate_user_input():
         print("Invalid Coordinate. Please try again.")       
     return user_input
 
-def reveal_cell(user_input, chosen_bomb_cells, row_display):
+def reveal_cell(user_input, chosen_bomb_cells, grid_display, row_display):
+    if grid_display[int(user_input[0])][int(user_input[1])] == "💣":
+        row_display[int(user_input[0])][int(user_input[1])] = "💣"
+        print("You hit a bomb! Game Over.")
+        sys.exit()
 
     pass
 
