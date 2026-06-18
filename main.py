@@ -30,10 +30,11 @@ Flagging: type 'flag' before coordinate to mark cells you suspect are mines (eg.
 def game():
     # set_timer()
     # difficulty = set_difficulty()
+    chosen_bomb_cells = random_bomb_placement()[1]
     grid_display = hidden_grid()
     row_display = display_grid()
     user_input = coordinate_user_input()
-    reveal_cell(user_input, chosen_bomb_cells, row_display)
+    reveal_cell(user_input, chosen_bomb_cells, grid_display, row_display)
     # display_bombs_detected()
     # coordinate_user_input()
 
@@ -173,6 +174,7 @@ def coordinate_user_input():
     return user_input
 
 def reveal_cell(user_input, chosen_bomb_cells, grid_display, row_display):
+    print("Revealing cell at coordinates:", user_input)
     if grid_display[int(user_input[0])][int(user_input[1])] == "💣":
         row_display[int(user_input[0])][int(user_input[1])] = "💣"
         print("You hit a bomb! Game Over.")
