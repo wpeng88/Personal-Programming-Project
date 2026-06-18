@@ -150,8 +150,21 @@ def coordinate_user_input():
     user_input = input("Choose a square by typing the coordinates (eg. A1)")
     if user_input[0] == "A":
         user_input = "0" + user_input[1]
-    if user_input[0] == "B":
+    elif user_input[0] == "B":
         user_input = "1" + user_input[1]
+    elif user_input[0] == "C":
+        user_input = "2" + user_input[1]
+    elif user_input[0] == "D":
+        user_input = "3" + user_input[1]
+    elif user_input[0] == "E":
+        user_input = "4" + user_input[1]
+    elif user_input[0] == "F":
+        user_input = "5" + user_input[1]
+    elif user_input[0] == "G":
+        user_input = "6" + user_input[1]
+    elif user_input[0] == "H":
+        user_input = "7" + user_input[1]
+    
     reveal_cell()
     return user_input
 
