@@ -30,7 +30,6 @@ Flagging: type 'flag' before coordinate to mark cells you suspect are mines (eg.
 def game():
     # set_timer()
     # difficulty = set_difficulty()
-    random_bomb_placement()
     hidden_grid()
     display_grid()
     coordinate_user_input()
@@ -151,6 +150,8 @@ def coordinate_user_input():
     user_input = input("Choose a square by typing the coordinates (eg. A1)")
     if user_input[0] == "A":
         user_input = "0" + user_input[1]
+    if user_input[0] == "B":
+        user_input = "1" + user_input[1]
     reveal_cell()
     return user_input
 
