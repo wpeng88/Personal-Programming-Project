@@ -1,6 +1,5 @@
 ## Personal Programming Project - William Peng
-import os, time, sys
-from random import randint
+import os, time, random, sys
 from random import randint
 from time import sleep
 
@@ -34,7 +33,7 @@ def game():
     chosen_bomb_cells = random_bomb_placement()[1]
     grid_display = hidden_grid()
     row_display = display_grid()
-    reveal_cell(user_input, grid_display, row_display)
+    user_input = coordinate_user_input()
     reveal_cell(user_input, chosen_bomb_cells, grid_display, row_display)
     # display_bombs_detected()
     # coordinate_user_input()
@@ -77,7 +76,7 @@ def random_bomb_placement():
 
 def hidden_grid():
     grid = calculate_bombs_around()
-    # cols = len(grid[0])  # Removed unused variable
+    rows = len(grid)
     cols = len(grid[0])
     column_headers = "A B C D E F G H"
     print("   " + column_headers)
@@ -87,7 +86,7 @@ def hidden_grid():
         print(grid_display)
     return grid_display, grid
 
-    grid = random_bomb_placement()[0]  # Removed unused variable
+def calculate_bombs_around():
     grid, chosen_bomb_cells = random_bomb_placement()
     directions = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
     bomb_count_grid = [[0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0]]
@@ -174,17 +173,17 @@ def coordinate_user_input():
         print("Invalid Coordinate. Please try again.")       
     return user_input
 
-def reveal_cell(user_input, grid, show_grid):
-    if user_input is not None: 
-        x, y = int(user_input[0]), int(user_input[1])
-        if grid[x][y] == "💣":
-            show_grid[x][y] = "💣"
-            display_grid()
-            print("You hit a bomb! Game Over.")
-            sys.exit()
-        else:
-            show_grid[x][y] = grid[x][y]
-            display_grid()
+def reveal_cell():
+    grid = random_bomb_placement()[0]
+    show_grid = set_grid()
+    user_input = coordinate_user_input()
+
+    if grid[int(user_input[0])][int(user_input[1])] == "💣":
+        show_grid[int(user_input[0])][int(user_input[1])] = "💣"
+        display_grid()
+        print("You hit a bomb! Game Over.")
+        sys.exit()
+
     pass
 
 def flag():
