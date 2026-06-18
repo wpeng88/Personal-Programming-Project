@@ -34,7 +34,7 @@ def game():
     grid_display = hidden_grid()
     row_display = display_grid()
     user_input = coordinate_user_input()
-    reveal_cell(user_input, chosen_bomb_cells, grid_display, row_display)
+    reveal_cell()
     # display_bombs_detected()
     # coordinate_user_input()
 
