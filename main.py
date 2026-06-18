@@ -173,12 +173,18 @@ def coordinate_user_input():
         print("Invalid Coordinate. Please try again.")       
     return user_input
 
-def reveal_cell(user_input, chosen_bomb_cells, grid, show_grid):
-    if grid[int(user_input[0])][int(user_input[1])] == "💣":
-        show_grid[int(user_input[0])][int(user_input[1])] = "💣"
-        display_grid()
-        print("You hit a bomb! Game Over.")
-        sys.exit()
+def reveal_cell():
+    grid = random_bomb_placement()[0]
+    show_grid = set_grid()
+    user_input = coordinate_user_input()
+
+    if user_input is not None: 
+        x, y = int(user_input[0]), int(user_input[1])
+        if grid[x][y] == "💣":
+            show_grid[x][y] = "💣"
+            display_grid()
+            print("You hit a bomb! Game Over.")
+            sys.exit()
 
     pass
 
