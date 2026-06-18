@@ -180,7 +180,17 @@ def reveal_cell():
 
     if grid[int(user_input[0])][int(user_input[1])] == "💣":
         show_grid[int(user_input[0])][int(user_input[1])] = "💣"
-        display_grid()
+        show_grid = set_grid()
+        rows = len(show_grid)
+        print(rows)
+        cols = len(show_grid[0])
+        print(cols)
+        column_headers = "A B C D E F G H"
+        print("   " + column_headers)
+        for row in range(1, rows + 1):
+            row_display = f"{row:<3}"
+            row_display += show_grid[row - 1][0] + show_grid[row - 1][1] + show_grid[row - 1][2] + show_grid[row - 1][3] + show_grid[row - 1][4] + show_grid[row - 1][5] + show_grid[row - 1][6] + show_grid[row - 1][7]
+            print(row_display)
         print("You hit a bomb! Game Over.")
         sys.exit()
 
