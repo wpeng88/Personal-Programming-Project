@@ -15,7 +15,7 @@ def clear_screen():
 
 def showrules():
     rules = ("""
-Starting: Choose a square by typing the coordinates (eg. A1) for the first square in the first row. The first square is always safe, often revealing a blank area.
+Starting: Choose a square by typing the coordinates (eg. A1) for the first square in the first row.
 Numbers: A number (1-8) indicates exactly how many mines are in the 8 adjacent cells - horizontal, vertical, and diagonal.
 Empty Cells: Choosing a cell with no adjacent mines reveals a large area
 Winning: Clear all non-mine cells.
@@ -33,6 +33,7 @@ def game():
     hidden_grid()
     display_grid()
     coordinate_user_input()
+    reveal_cell(user_input, chosen_bomb_cells, row_display)
     # display_bombs_detected()
     # coordinate_user_input()
 
@@ -148,32 +149,34 @@ def display_grid():
 def coordinate_user_input():
     pass
     user_input = input("Choose a square by typing the coordinates (eg. A1)")
-    if user_input[0] == "A":
-        user_input = "0" + user_input[1]
-    elif user_input[0] == "B":
-        user_input = "1" + user_input[1]
-    elif user_input[0] == "C":
-        user_input = "2" + user_input[1]
-    elif user_input[0] == "D":
-        user_input = "3" + user_input[1]
-    elif user_input[0] == "E":
-        user_input = "4" + user_input[1]
-    elif user_input[0] == "F":
-        user_input = "5" + user_input[1]
-    elif user_input[0] == "G":
-        user_input = "6" + user_input[1]
-    elif user_input[0] == "H":
-        user_input = "7" + user_input[1]
-    
-    reveal_cell()
+    if len(user_input) == 2 and user_input[0] in "ABCDEFGH" and user_input[1] in "12345678":
+        if user_input[0] == "A":
+            user_input = "0" + user_input[1]
+        elif user_input[0] == "B":
+            user_input = "1" + user_input[1]
+        elif user_input[0] == "C":
+            user_input = "2" + user_input[1]
+        elif user_input[0] == "D":
+            user_input = "3" + user_input[1]
+        elif user_input[0] == "E":
+            user_input = "4" + user_input[1]
+        elif user_input[0] == "F":
+            user_input = "5" + user_input[1]
+        elif user_input[0] == "G":
+            user_input = "6" + user_input[1]
+        elif user_input[0] == "H":
+            user_input = "7" + user_input[1]
+    elif "flag" in user_input:
+        flag()
+    else:
+        print("Invalid Coordinate. Please try again.")       
     return user_input
 
 def reveal_cell(user_input, chosen_bomb_cells, row_display):
-    if user_input in chosen_bomb_cells:
-        row_display = row_display.replace("⬜️", "💣")
-        print("Game Over! You hit a bomb!")
-    if user_input not in chosen_bomb_cells:
-        print("Safe! Keep going!")
+
+    pass
+
+def flag():
     pass
 
 
