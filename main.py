@@ -83,8 +83,8 @@ def hidden_grid():
     for row in range(1, rows + 1):
         grid_display = f"{row:<3}"
         grid_display += grid[row - 1][0] + " " + grid[row - 1][1] + " " + grid[row - 1][2] + " " + grid[row - 1][3] + " " + grid[row - 1][4] + " " + grid[row - 1][5] + " " + grid[row - 1][6] + " " + grid[row - 1][7]
-    print(grid_display)
-    return grid_display
+        print(grid_display)
+    return grid_display, grid
 
 def calculate_bombs_around():
     grid, chosen_bomb_cells = random_bomb_placement()
@@ -145,7 +145,7 @@ def display_grid():
         row_display = f"{row:<3}"
         row_display += show_grid[row - 1][0] + show_grid[row - 1][1] + show_grid[row - 1][2] + show_grid[row - 1][3] + show_grid[row - 1][4] + show_grid[row - 1][5] + show_grid[row - 1][6] + show_grid[row - 1][7]
         print(row_display)
-    return(row_display)
+    return row_display, show_grid
 
 def coordinate_user_input():
     pass
@@ -173,10 +173,10 @@ def coordinate_user_input():
         print("Invalid Coordinate. Please try again.")       
     return user_input
 
-def reveal_cell(user_input, chosen_bomb_cells, grid_display, row_display):
-    print("Revealing cell at coordinates:", user_input)
-    if grid_display == "💣":
-        row_display[int(user_input[0])][int(user_input[1])] = "💣"
+def reveal_cell(user_input, chosen_bomb_cells, grid, show_grid):
+    if grid[int(user_input[0])][int(user_input[1])] == "💣":
+        show_grid[int(user_input[0])][int(user_input[1])] = "💣"
+        display_grid()
         print("You hit a bomb! Game Over.")
         sys.exit()
 
