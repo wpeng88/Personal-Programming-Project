@@ -131,7 +131,6 @@ def calculate_bombs_around(bomb_grid):
                 continue
             
             count = 0
-            # Check all 8 surrounding cells
             for r in range(row - 1, row + 2):
                 for c in range(col - 1, col + 2):
                     if 0 <= r < 8 and 0 <= c < 8:
@@ -142,33 +141,90 @@ def calculate_bombs_around(bomb_grid):
     
     return bomb_count_grid
 
-
-# def hidden_grid():
-#     grid, chosen_bomb_cells = random_bomb_placement()
-#     grid_display = hidden_no_number_grid()
     
 
-
-
-    
-
-def display_grid():
-    show_grid = set_grid()
+def display_grid(show_grid):
     rows = len(show_grid)
-    print(rows)
     cols = len(show_grid[0])
     print(cols)
     column_headers = "A B C D E F G H"
     print("   " + column_headers)
+    print("   " + "-" * 15)
     for row in range(1, rows + 1):
-        row_display = f"{row:<3}"
-        row_display += show_grid[row - 1][0] + show_grid[row - 1][1] + show_grid[row - 1][2] + show_grid[row - 1][3] + show_grid[row - 1][4] + show_grid[row - 1][5] + show_grid[row - 1][6] + show_grid[row - 1][7]
+        row_display = f"{row:<2}|"
+        row_display += " "
+        for col in range(cols):
+            row_display += show_grid[row - 1][col] + " "
         print(row_display)
-    return row_display, show_grid
 
 def coordinate_user_input():
     user_input = input("Choose a square (eg. A1) or 'flag A1' to flag: ").strip()
     return user_input
+
+def is_valid_coordinate(coord):
+    if len(coord) != 2 or coord[0].upper() not in "ABCDEFGH" or coord[1] not in "12345678":
+        return False
+    else:
+        return True
+    
+def convert_coordinate(coord):
+    letter = coord[0].upper()
+    number = int(coord[1])
+    
+    if letter == "A":
+        col = 0
+    elif letter == "B":
+        col = 1
+    elif letter == "C":
+        col = 2
+    elif letter == "D":
+        col = 3
+    elif letter == "E":
+        col = 4
+    elif letter == "F":
+        col = 5
+    elif letter == "G":
+        col = 6
+    elif letter == "H":
+        col = 7
+    
+    row = number - 1
+    return row, col
+
+def handle_flag(user_input, show_grid):
+    flag_part = user_input[5:]
+    
+    if len(flag_part) == 2 and flag_part[0] in "ABCDEFGH" and flag_part[1] in "12345678":
+        if flag_part[0] == "A":
+            col = 0
+        elif flag_part[0] == "B":
+            col = 1
+        elif flag_part[0] == "C":
+            col = 2
+        elif flag_part[0] == "D":
+            col = 3
+        elif flag_part[0] == "E":
+            col = 4
+        elif flag_part[0] == "F":
+            col = 5
+        elif flag_part[0] == "G":
+            col = 6
+        elif flag_part[0] == "H":
+            col = 7
+        
+        row = int(flag_part[1]) - 1
+        
+        if show_grid[row][col] == "⬜️":
+            show_grid[row][col] = "🚩"
+            print("🚩 Cell flagged!")
+        elif show_grid[row][col] == "🚩":
+            show_grid[row][col] = "⬜️"
+            print("Cell unflagged!")
+        else:
+            print("You can only flag hidden cells!")
+    else:
+        print("Invalid flag! Use format: flag A1")
+    time.sleep(1)
 
 def reveal_cell(show_grid, number_grid, row, col):
     if show_grid[row][col] != "⬜️":
@@ -184,6 +240,14 @@ def reveal_cell(show_grid, number_grid, row, col):
                 if show_grid[new_row][new_col] == "⬜️":
                     reveal_cell(new_row, new_col, number_grid, show_grid)
 
+def reveal_all_bombs(bomb_grid, show_grid):
+    print("\nBomb locations:")
+    for row in range(8):
+        for col in range(8):
+            if bomb_grid[row][col] == "💣":
+                show_grid[row][col] = "💣"
+    display_grid(show_grid)
+    
 def count_flags(show_grid):
     count = 0
     for row in range(8):
