@@ -5,13 +5,14 @@ from time import sleep
 
 def main():
     showrules()
+    clear_screen()
     game()
 
 def clear_screen():
     for i in range(3):
         print(".")
         time.sleep(1)
-    os.system("cls")
+    print("\n" * 100)
 
 def showrules():
     rules = ("""
@@ -28,24 +29,59 @@ Flagging: type 'flag' before coordinate to mark cells you suspect are mines (eg.
     pass
 
 def game():
-    # set_timer()
-    # difficulty = set_difficulty()
-    chosen_bomb_cells = random_bomb_placement()[1]
-    grid_display = hidden_grid()
-    row_display = display_grid()
-    user_input = coordinate_user_input()
-    reveal_cell()
-    # display_bombs_detected()
-    # coordinate_user_input()
+    bomb_grid, bomb_locations = random_bomb_placement()
+    number_grid = calculate_bombs_around(bomb_grid)
+    show_grid = set_grid()
+    game_over = False
+    bombs = 10
+    total_cells = 64
+    
+    while not game_over:
+        clear_screen()
+        display_grid(show_grid)
+        print(f"💣 Bombs: {bombs} | 🚩 Flags: {count_flags(show_grid)}")
+        
+        user_input = coordinate_user_input()
+        
+        if user_input == "quit":
+            print("Thanks for playing!")
+            break
+        
+        if user_input.startswith("flag"):
+            handle_flag(user_input, show_grid)
+            time.sleep(1)
+            continue
+        
+        if not is_valid_coordinate(user_input):
+            print("Invalid coordinate! Use format: A1 to H8")
+            time.sleep(1)
+            continue
+        
+        row, col = convert_coordinate(user_input)
+        
+        if show_grid[row][col] != "⬜️":
+            print("Cell already revealed!")
+            time.sleep(1)
+            continue
+        
+        if bomb_grid[row][col] == "💣":
+            show_grid[row][col] = "💣"
+            clear_screen()
+            display_grid(show_grid)
+            print("💥 BOOM! You hit a bomb! Game Over.")
+            reveal_all_bombs(bomb_grid, show_grid)
+            game_over = True
+            break
+        
+        reveal_cell(row, col, number_grid, show_grid)
+        
+        if check_win(show_grid, total_cells, bombs):
+            clear_screen()
+            display_grid(show_grid)
+            print("🎉 Congratulations! You cleared all the cells! You win! 🎉")
+            game_over = True
+            break
 
-# def set_timer():
-#     start_time = time.time
-#     print(start_time())
-
-# def set_difficulty():
-#     print("Game load difficulty level based on number of bombs 💣 and board size. \nEasy - 10 bombs size 8*8\nMid - 40 bombs size 16 * 16\nHard - 99 bombs size 26 * 16 ")
-#     difficulty = input("Choose your difficulty... (Easy, Medium, Hard)").lower()
-#     return difficulty
 
 def set_grid():
     grid = [["⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️"],
@@ -72,7 +108,7 @@ def random_bomb_placement():
         grid[x][y] = "💣"
     print(chosen_bomb_cells)
     return grid, chosen_bomb_cells
-    
+
 
 def hidden_grid():
     grid = calculate_bombs_around()
@@ -86,41 +122,24 @@ def hidden_grid():
         print(grid_display)
     return grid_display, grid
 
-def calculate_bombs_around():
-    grid, chosen_bomb_cells = random_bomb_placement()
-    directions = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
-    bomb_count_grid = [[0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0]]
-
-    for x in range(len(grid)):
-        for y in range(len(grid[0])):
-            if grid[x][y] == "💣":
-                bomb_count_grid[x][y] = "💣"
+def calculate_bombs_around(bomb_grid):
+    bomb_count_grid = [["0" for _ in range(8)] for _ in range(8)]
+    for row in range(8):
+        for col in range(8):
+            if bomb_grid[row][col] == "💣":
+                bomb_count_grid[row][col] = "💣"
                 continue
-            bomb_count = 0
-            for dx, dy in directions:
-                nx, ny = x + dx, y + dy 
-                if 0 <= nx < len(grid) and 0 <= ny < len(grid[0]) and grid[nx][ny] == "💣":
-                    bomb_count += 1
-            if bomb_count == 0:   
-                bomb_count_grid[x][y] = "0"
-            elif bomb_count == 1:
-                bomb_count_grid[x][y] = "1"
-            elif bomb_count == 2:
-                bomb_count_grid[x][y] = "2"
-            elif bomb_count == 3:
-                bomb_count_grid[x][y] = "3"
-            elif bomb_count == 4:
-                bomb_count_grid[x][y] = "4"
-            elif bomb_count == 5:
-                bomb_count_grid[x][y] = "5"
-            elif bomb_count == 6:
-                bomb_count_grid[x][y] = "6"
-            elif bomb_count == 7:
-                bomb_count_grid[x][y] = "7"
-            elif bomb_count == 8:
-                bomb_count_grid[x][y] = "8"
-            else:
-                bomb_count_grid[x][y] = "0"
+            
+            count = 0
+            # Check all 8 surrounding cells
+            for r in range(row - 1, row + 2):
+                for c in range(col - 1, col + 2):
+                    if 0 <= r < 8 and 0 <= c < 8:
+                        if bomb_grid[r][c] == "💣":
+                            count += 1
+            
+            bomb_count_grid[row][col] = str(count)
+    
     return bomb_count_grid
 
 
@@ -148,55 +167,31 @@ def display_grid():
     return row_display, show_grid
 
 def coordinate_user_input():
-    pass
-    user_input = input("Choose a square by typing the coordinates (eg. A1)")
-    if len(user_input) == 2 and user_input[0] in "ABCDEFGH" and user_input[1] in "12345678":
-        if user_input[0] == "A":
-            user_input = "0" + user_input[1]
-        elif user_input[0] == "B":
-            user_input = "1" + user_input[1]
-        elif user_input[0] == "C":
-            user_input = "2" + user_input[1]
-        elif user_input[0] == "D":
-            user_input = "3" + user_input[1]
-        elif user_input[0] == "E":
-            user_input = "4" + user_input[1]
-        elif user_input[0] == "F":
-            user_input = "5" + user_input[1]
-        elif user_input[0] == "G":
-            user_input = "6" + user_input[1]
-        elif user_input[0] == "H":
-            user_input = "7" + user_input[1]
-    elif "flag" in user_input:
-        flag()
-    else:
-        print("Invalid Coordinate. Please try again.")       
+    user_input = input("Choose a square (eg. A1) or 'flag A1' to flag: ").strip()
     return user_input
 
-def reveal_cell():
-    grid = random_bomb_placement()[0]
-    show_grid = set_grid()
-    user_input = coordinate_user_input()
+def reveal_cell(show_grid, number_grid, row, col):
+    if show_grid[row][col] != "⬜️":
+        return
+    show_grid[row][col] = number_grid[row][col]
+    
+    if number_grid[row][col] == "0":
+        directions = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
+        for dx, dy in directions:
+            new_row = row + dx
+            new_col = col + dy
+            if 0 <= new_row < 8 and 0 <= new_col < 8:
+                if show_grid[new_row][new_col] == "⬜️":
+                    reveal_cell(new_row, new_col, number_grid, show_grid)
 
-    if grid[int(user_input[0])][int(user_input[1])] == "💣":
-        show_grid[int(user_input[0])][int(user_input[1])] = "💣"
-        show_grid = set_grid()
-        rows = len(show_grid)
-        print(rows)
-        cols = len(show_grid[0])
-        print(cols)
-        column_headers = "A B C D E F G H"
-        print("   " + column_headers)
-        for row in range(1, rows + 1):
-            row_display = f"{row:<3}"
-            row_display += show_grid[row - 1][0] + show_grid[row - 1][1] + show_grid[row - 1][2] + show_grid[row - 1][3] + show_grid[row - 1][4] + show_grid[row - 1][5] + show_grid[row - 1][6] + show_grid[row - 1][7]
-            print(row_display)
-        print("You hit a bomb! Game Over.")
-        sys.exit()
+def count_flags(show_grid):
+    count = 0
+    for row in range(8):
+        for col in range(8):
+            if show_grid[row][col] == "🚩":
+                count += 1
+    return count
 
-    pass
-
-def flag():
     pass
 
 
