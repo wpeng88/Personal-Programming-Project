@@ -83,7 +83,6 @@ def game():
 
 def coordinate_user_input():
     user_input = input("Choose a square (eg. A1) or 'flag A1' to flag: ").strip()
-    user_input = user_input.lower()
     return user_input
 
 def set_grid():
