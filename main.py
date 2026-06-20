@@ -247,7 +247,15 @@ def reveal_all_bombs(bomb_grid, show_grid):
             if bomb_grid[row][col] == "💣":
                 show_grid[row][col] = "💣"
     display_grid(show_grid)
-    
+
+def check_win(show_grid, total_cells, bombs):
+    revealed = 0
+    for row in range(8):
+        for col in range(8):
+            if show_grid[row][col] != "⬜️":
+                revealed += 1
+    return revealed == (total_cells - bombs)
+
 def count_flags(show_grid):
     count = 0
     for row in range(8):
