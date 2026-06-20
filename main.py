@@ -1,6 +1,7 @@
 ## Personal Programming Project - William Peng
 from random import randint
 from time import sleep
+import os, time, random, sys
 
 def main():
     showrules()
@@ -41,7 +42,45 @@ def game():
         print(f"💣 Bombs: {bombs} | 🚩 Flags: {count_flags(show_grid)}")
         
         user_input = coordinate_user_input()
-
+        
+        if user_input == "quit":
+            print("Thanks for playing!")
+            break
+        
+        if user_input.startswith("flag"):
+            handle_flag(user_input, show_grid)
+            time.sleep(1)
+            continue
+        
+        if not is_valid_coordinate(user_input):
+            print("Invalid coordinate! Use format: A1 to H8")
+            time.sleep(1)
+            continue
+        
+        row, col = convert_coordinate(user_input)
+        
+        if show_grid[row][col] != "⬜️":
+            print("Cell already revealed!")
+            time.sleep(1)
+            continue
+        
+        if bomb_grid[row][col] == "💣":
+            show_grid[row][col] = "💣"
+            clear_screen()
+            display_grid(show_grid)
+            print("💥 BOOM! You hit a bomb! Game Over.")
+            reveal_all_bombs(bomb_grid, show_grid)
+            game_over = True
+            break
+        
+        reveal_cell(row, col, number_grid, show_grid)
+        
+        if check_win(show_grid, total_cells, bombs):
+            clear_screen()
+            display_grid(show_grid)
+            print("🎉 Congratulations! You cleared all the cells! You win! 🎉")
+            game_over = True
+            break
 
 def set_grid():
     grid = [["⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️", "⬜️"],
@@ -77,30 +116,47 @@ def hidden_grid():
     print("   " + column_headers)
     for row in range(1, rows + 1):
         grid_display = f"{row:<3}"
-        grid_display += grid[row - 1][0] + " " + grid[row - 1][1] + " " + grid[row - 1][2] + " " + grid[row - 1][3] + " " + grid[row - 1][4] + " " + grid[row - 1][5] + " " + grid[row - 1][6] + " " + grid[row - 1][7]
+        grid_display += grid[row - 1][0] + " " + grid[row - 1][1] + " " + grid[row - 1][2] + " " + grid[row - 1][3] + " " + grid[row - 1][4] + " " + grid[row - 1][5] + " " + grid[row - 1][6] + " "
         print(grid_display)
     return grid_display, grid
 
-def calculate_bombs_around(bomb_grid):
-    bomb_count_grid = [["0" for _ in range(8)] for _ in range(8)]
-    for row in range(8):
-        for col in range(8):
-            if bomb_grid[row][col] == "💣":
-                bomb_count_grid[row][col] = "💣"
+def calculate_bombs_around():
+    grid, chosen_bomb_cells = random_bomb_placement()
+    directions = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
+    bomb_count_grid = [[0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0]]
+
+    for x in range(len(grid)):
+        for y in range(len(grid[0])):
+            if grid[x][y] == "💣":
+                bomb_count_grid[x][y] = "💣"
                 continue
-            
-            count = 0
-            for r in range(row - 1, row + 2):
-                for c in range(col - 1, col + 2):
-                    if 0 <= r < 8 and 0 <= c < 8:
-                        if bomb_grid[r][c] == "💣":
-                            count += 1
-            
-            bomb_count_grid[row][col] = str(count)
-    
+            bomb_count = 0
+            for dx, dy in directions:
+                nx, ny = x + dx, y + dy 
+                if 0 <= nx < len(grid) and 0 <= ny < len(grid[0]) and grid[nx][ny] == "💣":
+                    bomb_count += 1
+            if bomb_count == 0:   
+                bomb_count_grid[x][y] = "0"
+            elif bomb_count == 1:
+                bomb_count_grid[x][y] = "1"
+            elif bomb_count == 2:
+                bomb_count_grid[x][y] = "2"
+            elif bomb_count == 3:
+                bomb_count_grid[x][y] = "3"
+            elif bomb_count == 4:
+                bomb_count_grid[x][y] = "4"
+            elif bomb_count == 5:
+                bomb_count_grid[x][y] = "5"
+            elif bomb_count == 6:
+                bomb_count_grid[x][y] = "6"
+            elif bomb_count == 7:
+                bomb_count_grid[x][y] = "7"
+            elif bomb_count == 8:
+                bomb_count_grid[x][y] = "8"
+            else:
+                bomb_count_grid[x][y] = "0"
     return bomb_count_grid
 
-    
 
 def display_grid(show_grid):
     rows = len(show_grid)
@@ -184,7 +240,7 @@ def handle_flag(user_input, show_grid):
         print("Invalid flag! Use format: flag A1")
     time.sleep(1)
 
-def reveal_cell(show_grid, number_grid, row, col):
+def reveal_cell(row, col, number_grid, show_grid):
     if show_grid[row][col] != "⬜️":
         return
     show_grid[row][col] = number_grid[row][col]
