@@ -1,5 +1,4 @@
 ## Personal Programming Project - William Peng
-import os, time, random, sys
 from random import randint
 from time import sleep
 
@@ -42,45 +41,6 @@ def game():
         print(f"💣 Bombs: {bombs} | 🚩 Flags: {count_flags(show_grid)}")
         
         user_input = coordinate_user_input()
-        
-        if user_input == "quit":
-            print("Thanks for playing!")
-            break
-        
-        if user_input.startswith("flag"):
-            handle_flag(user_input, show_grid)
-            time.sleep(1)
-            continue
-        
-        if not is_valid_coordinate(user_input):
-            print("Invalid coordinate! Use format: A1 to H8")
-            time.sleep(1)
-            continue
-        
-        row, col = convert_coordinate(user_input)
-        
-        if show_grid[row][col] != "⬜️":
-            print("Cell already revealed!")
-            time.sleep(1)
-            continue
-        
-        if bomb_grid[row][col] == "💣":
-            show_grid[row][col] = "💣"
-            clear_screen()
-            display_grid(show_grid)
-            print("💥 BOOM! You hit a bomb! Game Over.")
-            reveal_all_bombs(bomb_grid, show_grid)
-            game_over = True
-            break
-        
-        reveal_cell(row, col, number_grid, show_grid)
-        
-        if check_win(show_grid, total_cells, bombs):
-            clear_screen()
-            display_grid(show_grid)
-            print("🎉 Congratulations! You cleared all the cells! You win! 🎉")
-            game_over = True
-            break
 
 
 def set_grid():
@@ -106,7 +66,6 @@ def random_bomb_placement():
     for cell in chosen_bomb_cells:
         x, y = int(cell[0]) - 1, int(cell[1]) - 1
         grid[x][y] = "💣"
-    print(chosen_bomb_cells)
     return grid, chosen_bomb_cells
 
 
@@ -146,7 +105,6 @@ def calculate_bombs_around(bomb_grid):
 def display_grid(show_grid):
     rows = len(show_grid)
     cols = len(show_grid[0])
-    print(cols)
     column_headers = "A B C D E F G H"
     print("   " + column_headers)
     print("   " + "-" * 15)
