@@ -12,7 +12,7 @@ def clear_screen():
     for i in range(3):
         print(".")
         time.sleep(0.5)
-    os.system("cls")
+    print("\n" * 100)
 
 def showrules():
     rules = ("""
